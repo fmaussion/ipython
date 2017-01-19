@@ -892,6 +892,12 @@ class IPythonDirective(Directive):
             self.shell.IP.execution_count = 1
             self.seen_docs.add(self.state.document.current_source)
 
+        # Ensure that the directory for saving figures exists
+        try:
+            os.makedirs(os.path.abspath(savefig_dir))
+        except:
+            pass
+
         # and attach to shell so we don't have to pass them around
         self.shell.rgxin = rgxin
         self.shell.rgxout = rgxout
